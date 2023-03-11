@@ -8,11 +8,15 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
 public class TodoService {
     private final String TODO_API_URL = "https://jsonplaceholder.typicode.com/todos";
+
+    private Logger log = Logger.getLogger("TodoService");
 
     private final RestTemplate restTemplate;
 
@@ -22,6 +26,7 @@ public class TodoService {
 
     public List<Todo> getTodos() {
         Todo[] todos = restTemplate.getForObject(TODO_API_URL, Todo[].class);
+        log.log(Level.INFO, "Fetched todos");
         return Arrays.stream(todos).collect(Collectors.toList());
     }
 
