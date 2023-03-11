@@ -26,4 +26,10 @@ public class TodoController {
         todoService.saveTodos(todos, todoRepository);
         return todos;
     }
+
+    @GetMapping("/login")
+    public boolean login() {
+        todoService.login();
+        return Boolean.TRUE;
+    }
 }

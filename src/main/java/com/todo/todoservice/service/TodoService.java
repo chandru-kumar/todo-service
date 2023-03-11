@@ -28,4 +28,34 @@ public class TodoService {
     public void saveTodos(List<Todo> todos, TodoRepository todoRepository) {
         todoRepository.saveAll(todos);
     }
+
+    public void login() {
+        authenticateUser();
+        generateKey();
+        fetchDashboardDetails();
+    }
+
+    private void fetchDashboardDetails() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void authenticateUser() {
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void generateKey() {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
