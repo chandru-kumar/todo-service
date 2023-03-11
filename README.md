@@ -17,3 +17,5 @@ To run it in Docker:
 To push to your docker registry:
 `docker tag todo-app <YOUR_DOCKER_HUB_NAME>/todo-app`
 `docker image push <YOUR_DOCKER_HUB_NAME>/todo-app`
+
+Download zipkin and run it - port 9411
