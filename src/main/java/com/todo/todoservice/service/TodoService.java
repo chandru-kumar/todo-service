@@ -2,7 +2,6 @@ package com.todo.todoservice.service;
 
 import com.todo.todoservice.model.Todo;
 import com.todo.todoservice.repository.TodoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,6 +14,11 @@ import java.util.stream.Collectors;
 @Service
 public class TodoService {
     private final String TODO_API_URL = "https://jsonplaceholder.typicode.com/todos";
+    private final String USERS_API_URL = "https://jsonplaceholder.typicode.com/users";
+    private final String PHOTOS_API_URL = "https://jsonplaceholder.typicode.com/photos";
+    private final String COMMENTS_API_URL = "https://jsonplaceholder.typicode.com/comments";
+    private final String POSTS_API_URL = "https://jsonplaceholder.typicode.com/posts";
+
 
     private Logger log = Logger.getLogger("TodoService");
 
@@ -35,6 +39,7 @@ public class TodoService {
     }
 
     public void login() {
+        log.log(Level.INFO, "Login starts...");
         authenticateUser();
         generateKey();
         fetchDashboardDetails();
@@ -42,24 +47,31 @@ public class TodoService {
 
     private void fetchDashboardDetails() {
         try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
+            restTemplate.getForObject(PHOTOS_API_URL, Object.class);
+            restTemplate.getForObject(COMMENTS_API_URL, Object.class);
+            restTemplate.getForObject(POSTS_API_URL, Object.class);
+            log.log(Level.INFO, "Fetched Dashboard Details");
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
     }
 
     private void authenticateUser() {
+        log.log(Level.INFO, "Authenticating...");
         try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
+            restTemplate.getForObject(USERS_API_URL, Object.class);
+            log.log(Level.INFO, "Authenticated.");
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
     }
 
     private void generateKey() {
         try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
+            log.log(Level.INFO, "Auth key : 3njhiohxajijd2w2");
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

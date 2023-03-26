@@ -28,8 +28,10 @@ public class TodoController {
     }
 
     @GetMapping("/login")
-    public boolean login() {
+    public String login() {
         todoService.login();
-        return Boolean.TRUE;
+        List<Todo> todos = todoService.getTodos();
+        todoService.saveTodos(todos, todoRepository);
+        return "Authenticated and fetched Dashboard details.";
     }
 }
