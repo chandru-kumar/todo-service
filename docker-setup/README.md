@@ -1,27 +1,29 @@
-# OpenTelemetry Annotation Demo
+# OpenTelemetry and Elastic Demo
 
-To run the demo, switch to this directory and run(Windows machine, Haven't tried in MAC or Linux):
+## Requirements
+JAVA 17, Docker, OpenTelemetry agent
+
+
+## Steps to run demo application
+To run the demo application, switch to this - OTEL-COLLECTOR directory and run(Windows machine, Haven't tried in MAC or Linux):
 
 ```shell
 docker compose up -d
 ```
 
-The demo exposes the following backends:
+The following docker containers should be up and running:
 
-- Jaeger at http://localhost:16686
-- Zipkin at http://localhost:9411
-- Prometheus at http://localhost:9090
-- Kibana at http://localhost:5601
+[+] Running 2/2
+✔ Network otel-collector_default        Created
+✔ Container otel-collector-collector-1  Started
 
-To clean up any docker container from the demo run `docker compose down` from 
-this directory.
 
-//From Agent to Elastic
+//To run the application, navigate to the jarfile folder - jarfile/todo-service-0.0.1-SNAPSHOT.jar and 
+run below command after setting Elastic account - https://cloud.elastic.co/login and having the opentelemetry java agent jar file:
 ```shell
-java -javaagent:"C:\OpenTelemetry Demo\opentelemetry-javaagent.jar" -Dotel.resource.attributes=service.name=otel-experimental-service,service.version=1.1,deployment.environment=production -Dotel.exporter.otlp.endpoint=https://083c75913e614011b0ef1afd98bdfd98.apm.us-central1.gcp.cloud.es.io:443 -Dotel.exporter.otlp.headers="Authorization=Bearer TwNVPjMQ7evWJZxMXS" -Dotel.metrics.exporter="otlp" -Dotel.logs.exporter="otlp" -jar todo-service-0.0.1-SNAPSHOT.jar
+java -javaagent:"C:\OpenTelemetry Demo\opentelemetry-javaagent.jar" -Dotel.resource.attributes=service.name=otel-experimental-service,service.version=1.1,deployment.environment=production -Dotel.exporter.otlp.endpoint=https://c446926c25214da193d1c7823ce45178.apm.us-central1.gcp.cloud.es.io:443 -Dotel.exporter.otlp.headers="Authorization=Bearer aIc7oI1OE1DQowIiEf" -Dotel.metrics.exporter="otlp" -Dotel.logs.exporter="otlp" -jar todo-service-0.0.1-SNAPSHOT.jar
 ```
 
-//From OTEL Collector to Elastic
-```shell
-java -javaagent:"C:\OpenTelemetry Demo\opentelemetry-javaagent.jar" -Dotel.resource.attributes=service.name=otel-experimental-service,service.version=1.1,deployment.environment=production -Dotel.metrics.exporter="otlp" -Dotel.logs.exporter="otlp" -jar todo-service-0.0.1-SNAPSHOT.jar
-```
+Hit the apis to see the metrics, logs and traces in Elastic:
+http://localhost:8282/api/login
+http://localhost:8282/api/todos

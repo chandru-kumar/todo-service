@@ -4,9 +4,9 @@ receivers:
       grpc:
 exporters:
   otlp/elastic:
-    endpoint: https://f896c493d1284f4cb117a705d664bf09.apm.us-central1.gcp.cloud.es.io:443
+    endpoint: https://7a0e7fa66e3c4435bc8b2527a9ee6bef.apm.us-central1.gcp.cloud.es.io:443
     headers:
-      Authorization: "Bearer 86KQgPsVaaRkSklPCF"
+      Authorization: "Bearer mR0A8CCNHthGzL4OxV"
   logging:
     verbosity: detailed
 service:
